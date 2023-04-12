@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import FavouriteBeers from './FavouriteBeers';
 import MainPage from './MainPage';
+import SelectedBeers from './SelectedBeer';
 
 function App() {
   const [likedBeers, setLikedBeers] = useState<number[]>([]);
@@ -14,8 +15,9 @@ function App() {
     <div>
       <Router>
         <Routes>
-        <Route path="/" element={<MainPage onLikedBeersChange={handleValueChange} />} />
-          <Route path="/liked" element={<FavouriteBeers likedBeers={likedBeers} />} /> <Route/>
+          <Route path="/" element={<MainPage onLikedBeersChange={handleValueChange} />} />
+          <Route path="/liked" element={<FavouriteBeers likedBeers={likedBeers} />} /> 
+          <Route path="/beer/:id" element={<SelectedBeers />} />
         </Routes>
       </Router>
     </div>

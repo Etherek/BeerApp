@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import './App.css';
+import './MainPage.css';
 import NavBar from './NavBar';
 import { Link } from 'react-router-dom';
 import {
@@ -8,6 +8,7 @@ import {
 } from '@ant-design/icons';
 
 export interface Beer {
+  description: string;
   id: number;
   name: string;
   tagline: string;
@@ -22,14 +23,18 @@ function MainPage({ onLikedBeersChange }: Props) {
   const [beers, setBeers] = useState<Beer[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [likedBeers, setLikedBeers] = useState<number[]>([]);
+  const [likedBeers, setLikedBeers] = useState<number[]>(() => {
+    const storedLikedBeers = JSON.parse(localStorage.getItem('likedBeers') || '[]');
+    return storedLikedBeers;
+  });
   const endRef = useRef<HTMLDivElement>(null);
 
   const storedLikedBeers = useRef<number[]>([]);
+
   useEffect(() => {
-    storedLikedBeers.current = JSON.parse(localStorage.getItem('likedBeers') || '[]');
-    setLikedBeers(storedLikedBeers.current);
-  }, []);
+    storedLikedBeers.current = likedBeers;
+    localStorage.setItem('likedBeers', JSON.stringify(storedLikedBeers.current));
+  }, [likedBeers]);
 
   const loadMore = () => {
     setCurrentPage(currentPage + 1);
@@ -46,6 +51,7 @@ function MainPage({ onLikedBeersChange }: Props) {
         }));
         setBeers([...beers, ...newBeers]);
         setIsLoading(false);
+
       });
   }, [currentPage]);
 
@@ -60,11 +66,14 @@ function MainPage({ onLikedBeersChange }: Props) {
         ? prevLikedBeers.filter((beerId) => beerId !== id)
         : [...prevLikedBeers, id]
     );
+  };
+  
+  useEffect(() => {
     storedLikedBeers.current = likedBeers;
     localStorage.setItem('likedBeers', JSON.stringify(storedLikedBeers.current));
     onLikedBeersChange(likedBeers);
-  };
-
+  }, [likedBeers]);
+  
   useEffect(() => {
     const handleScroll = () => {
       if (
@@ -88,25 +97,32 @@ function MainPage({ onLikedBeersChange }: Props) {
    
     <div className="App">
       <NavBar />
-      <div>
-      <Link to="/liked">Ulubione Piwa</Link>
+      <div className="likedBeers">
+        <Link to="/liked">Ulubione Piwa</Link>
       </div>
-
+      <div className="beers">
           {beers.map((beer) => (
+
             <div className="beer" key={beer.id}>
               {beer.liked ? (
                 <HeartFilled onClick={() => handleLike(beer.id)} />
               ) : (
                 <HeartOutlined onClick={() => handleLike(beer.id)} />
               )}
-              <h3>{beer.name}</h3>
+              
+              <Link to={`/beer/${beer.id}`}><h3>{beer.name}</h3></Link>
+
               <img src={beer.image_url} className="img" alt={beer.name} />
               <p>{beer.tagline}</p>
             </div>
+            
           ))}
 
       {isLoading && <div>Loading...</div>}
+
       <div ref={endRef} />
+      </div>
+      
     </div>
   
   
