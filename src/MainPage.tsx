@@ -3,7 +3,8 @@ import './MainPage.css';
 import NavBar from './NavBar';
 import { Link } from 'react-router-dom';
 import {
-  HeartOutlined,
+  LikeFilled,
+  LikeOutlined,
   HeartFilled,
 } from '@ant-design/icons';
 
@@ -106,18 +107,21 @@ function MainPage({ onLikedBeersChange }: Props) {
     <div className="App">
       <NavBar />
       <div className="likedBeers">
-        <Link to="/liked">Ulubione Piwa</Link>
+        <div className="likedBeersIcon">
+          <Link to="/liked"><HeartFilled></HeartFilled></Link>
+        </div>
       </div>
       <div className="beers">
           {beers.map((beer) => (
 
             <div className="beer" key={beer.id}>
+              <div className="heart">
               {beer.liked ? (
-                <HeartFilled onClick={() => handleLike(beer.id)} />
+                <LikeFilled onClick={() => handleLike(beer.id)} />
               ) : (
-                <HeartOutlined onClick={() => handleLike(beer.id)} />
+                <LikeOutlined onClick={() => handleLike(beer.id)} />
               )}
-              
+              </div>
               <Link to={`/beer/${beer.id}`}><h3>{beer.name}</h3></Link>
 
               <img src={beer.image_url} className="img" alt={beer.name} />

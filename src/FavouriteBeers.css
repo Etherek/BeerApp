@@ -1,10 +1,11 @@
 .favBeers {
   width: 80%;
+  height: 100%;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
   justify-content: center; /* wycentrowanie elementów w poziomie */
-  gap: 20px; /* odstęp między elementami */
+  gap: 1%; /* odstęp między elementami */
   
 }
 .favBeers img {
@@ -18,11 +19,17 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: calc((100% - 80px) / 5); /* obliczenie szerokości elementów */
+  width: calc((100% - 80px) / 5); 
+  border: 1px solid black;
+  margin-bottom: 1%;
 }
-
+.favBeer a {
+  text-decoration: none;
+  color: orange;
+}
 .title {
   width: 80%;
   display: flex;
-  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
 }

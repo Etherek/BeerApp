@@ -30,10 +30,15 @@ body {
   height: 70%;
   object-fit: contain;
   margin-bottom: 10px;
+
 }
 .beer a {
   text-decoration: none;
   color: orange;
+}
+
+.heart {
+  padding-left: 90%;
 }
 
 .likedBeers {
@@ -44,11 +49,16 @@ body {
   margin-right: 2%;
   height: 5%;
   padding: 10px;
+  font-size: 2em;
+  box-sizing: border-box;
+  border-color: black;
 }
 .likedBeers a {
   text-decoration: none;
   color: orange;
 }
+
+
 @media screen and (max-width: 768px) {
   .beer {
     flex-basis: calc(18% - 2%);
