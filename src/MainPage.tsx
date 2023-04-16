@@ -8,12 +8,22 @@ import {
 } from '@ant-design/icons';
 
 export interface Beer {
+  price: number;
+  currency: string;
+  volume: Volume;
+  first_brewed: string;
+  ibu: number;
+  abv: number;
   description: string;
   id: number;
   name: string;
   tagline: string;
   image_url:string;
   liked: boolean;
+}
+interface Volume {
+  value: number;
+  unit: string;
 }
 type Props = {
   onLikedBeersChange: (newLikedBeers: number[]) => void;
@@ -91,8 +101,6 @@ function MainPage({ onLikedBeersChange }: Props) {
     };
   }, [isLoading, beers]);
 
-  console.log(localStorage.likedBeers)
-  console.log(likedBeers)
   return (
    
     <div className="App">

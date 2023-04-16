@@ -22,12 +22,17 @@ import { useParams } from 'react-router-dom';
     }
   
     return (
-      <div className="beer">
+      <div className="choosedBeer">
         <h2>{beer.name}</h2>
-        <img src={beer.image_url} alt={beer.name} />
+        <div className='choosedBeerImage'>
+          <img src={beer.image_url} alt={beer.name} />
+        </div>
         <p>{beer.tagline}</p>
         <p>{beer.description}</p>
-        // reszta kodu
+        <p>Alcohol by volume (ABV): {beer.abv}%</p>
+        <p>International Bitterness Units (IBU): {beer.ibu}</p>
+        <p>Brewed on: {beer.first_brewed}</p>
+        <p>Available volume: {beer.volume.value} {beer.volume.unit}</p>
       </div>
     );
   }

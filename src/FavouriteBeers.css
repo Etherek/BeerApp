@@ -1,54 +1,28 @@
-.App {
-    text-align: center;
-    width: 80%;
-    display: flex;
-    flex-wrap: wrap;
-    margin: auto;
-    margin-top: 2%;
-  }
-  body {
-    background: linear-gradient(to top right, #000000, #4B0082);
-    color: orange; 
-  }
-  .beer {
-    box-sizing: border-box;
-    margin: 1%;
-    flex: 0 0 calc(25% - 2%);
-    border: 1px solid black;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 300px;
-  }
+.favBeers {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* wycentrowanie elementów w poziomie */
+  gap: 20px; /* odstęp między elementami */
   
-  .beer img {
-    max-width: 100%;
-    height: 70%;
-    object-fit: contain;
-    margin-bottom: 10px;
-  }
-  
-  @media screen and (max-width: 768px) {
-    .beer {
-      flex-basis: calc(18% - 2%);
-      height: 300px;
-      max-height: 300px;
-    }
-  }
-  
-  @media screen and (min-width: 769px) and (max-width: 1024px) {
-    .beer {
-      flex-basis: calc(20% - 2%);
-      height: 300px;
-      max-height: 300px;
-    }
-  }
-  
-  @media screen and (min-width: 1025px) {
-    .beer {
-      flex-basis: calc(20% - 2%); 
-      height: 300px;
-      max-height: 300px;
-    }
-  }
+}
+.favBeers img {
+
+    max-width: 10%;
+    height: auto;
+
+}
+.favBeer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: calc((100% - 80px) / 5); /* obliczenie szerokości elementów */
+}
+
+.title {
+  width: 80%;
+  display: flex;
+  align-items: center;
+}
